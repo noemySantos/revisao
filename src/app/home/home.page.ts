@@ -13,7 +13,7 @@ export class HomePage {
   constructor(public modalController: ModalController) {
     this.perfis = [
       {
-        "avatar": "https://cdn-ofuxico.akamaized.net/img/upload/noticias/2019/06/05/neymar-instagram_350808_36.jpg",
+        "avatar": "https://data.whicdn.com/images/310986657/large.jpg",
         "nome": "Neymar",
         "idade": "27 anos",
         "likes": 0,
