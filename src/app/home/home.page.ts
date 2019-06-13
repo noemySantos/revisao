@@ -13,16 +13,19 @@ export class HomePage {
       {
         "avatar": "https://cdn-ofuxico.akamaized.net/img/upload/noticias/2019/06/05/neymar-instagram_350808_36.jpg",
         "nome": "Neymar",
-        "idade": "25 anos",
-        "like": "500",
+        "idade": "26 anos",
+        "likes": 0,
       },
 
       {
         "avatar": "https://tmssl.akamaized.net/images/portrait/originals/29241-1462893880.jpg",
         "nome": "tiago silva",
         "idade": "22 anos",
-        "like": "100",
+        "likes": 0,
       }
     ]
+  }
+  likes(perfil) {
+   perfil.likes= perfil.likes+1;
   }
 }

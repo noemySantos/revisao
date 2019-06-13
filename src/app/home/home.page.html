@@ -18,10 +18,10 @@
         </ion-card-header>
 
         <ion-card-content>
-         <ion-item>
-           <ion-icon name="heart-empty" slot="start"></ion-icon>
-           <ion-badge color="secondary" slot="end">1000</ion-badge>
-         </ion-item>
+          <ion-item>
+            <ion-icon name="heart-empty" slot="start" (click)="likes(perfil)"></ion-icon>
+            <ion-badge color="secondary" slot="end">{{perfil.likes}}</ion-badge>
+          </ion-item>
         </ion-card-content>
       </ion-card>
     </ion-slide>
