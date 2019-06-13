@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Ionic Blank
+      Perfil de jogadores
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -26,5 +26,9 @@
       </ion-card>
     </ion-slide>
   </ion-slides>
-
+  <ion-fab (click)="abrir_modal()" class="button-native" vertical="bottom" horizontal="end">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

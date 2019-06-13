@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { NovoPerfilModalPage } from '../novo-perfil-modal/novo-perfil-modal.page';
 
 @Component({
   selector: 'app-home',
@@ -8,24 +10,37 @@ import { Component } from '@angular/core';
 export class HomePage {
   perfis = [];
 
-  constructor() {
+  constructor(public modalController: ModalController) {
     this.perfis = [
       {
         "avatar": "https://cdn-ofuxico.akamaized.net/img/upload/noticias/2019/06/05/neymar-instagram_350808_36.jpg",
         "nome": "Neymar",
-        "idade": "26 anos",
+        "idade": "27 anos",
         "likes": 0,
       },
 
       {
         "avatar": "https://tmssl.akamaized.net/images/portrait/originals/29241-1462893880.jpg",
         "nome": "tiago silva",
-        "idade": "22 anos",
+        "idade": "34 anos",
         "likes": 0,
       }
     ]
   }
   likes(perfil) {
-   perfil.likes= perfil.likes+1;
+    perfil.likes = perfil.likes + 1;
+  }
+
+  async abrir_modal() {
+    let modal = await this.modalController.create({
+      component: NovoPerfilModalPage
+    });
+
+    modal.onDidDismiss().then((perfil) => {
+      this.perfis.push(perfil);
+    });
+
+    modal.present();
+
   }
 }
