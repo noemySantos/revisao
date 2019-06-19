@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Storage } from '@ionic/storage';
 import { ModalController } from '@ionic/angular';
 import { NovoPerfilModalPage } from '../novo-perfil-modal/novo-perfil-modal.page';
 
@@ -10,7 +11,7 @@ import { NovoPerfilModalPage } from '../novo-perfil-modal/novo-perfil-modal.page
 export class HomePage {
   perfis = [];
 
-  constructor(public modalController: ModalController) {
+  constructor(public modalController: ModalController, private storage: Storage) {
     this.perfis = [
       {
         "avatar": "https://data.whicdn.com/images/310986657/large.jpg",
@@ -27,6 +28,13 @@ export class HomePage {
       }
     ]
   }
+  remove(perfil) {
+    var i = this.perfis.indexOf(perfil);
+    this.perfis.splice(i, 1);
+    this.storage.set('perfil', this.perfis)
+  }
+
+
   likes(perfil) {
     perfil.likes = perfil.likes + 1;
   }
@@ -36,8 +44,8 @@ export class HomePage {
       component: NovoPerfilModalPage
     });
 
-    modal.onDidDismiss().then((perfil) => {
-      this.perfis.push(perfil);
+    modal.onDidDismiss().then((retorno) => {
+      this.perfis.push(retorno.data);
     });
 
     modal.present();

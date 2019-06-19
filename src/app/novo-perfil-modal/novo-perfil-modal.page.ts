@@ -21,13 +21,13 @@ export class NovoPerfilModalPage implements OnInit {
   }
 
   add() {
-    this.modalController.dismiss(this.novo_perfil)
+    this.modalController.dismiss(this.novo_perfil);
   }
 
   take_picture() {
     const options: CameraOptions = {
       quality: 50,
-      destinationType: this.camera.DestinationType.FILE_URI,
+      destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
     }

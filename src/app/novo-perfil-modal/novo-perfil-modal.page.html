@@ -2,24 +2,26 @@
   <ion-toolbar>
     <ion-title>NovoPerfilModal</ion-title>
   </ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-button href="/home">Voltar</ion-button>
+  </ion-buttons>
 </ion-header>
 
 <ion-content>
-
   <ion-list>
 
     <ion-item>
       <ion-label>Nome:</ion-label>
-      <ion-input [(ngModel)]="perfil.nome"></ion-input>
+      <ion-input [(ngModel)]="novo_perfil.nome"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label>Idade:</ion-label>
-      <ion-input [(ngModel)]="perfil.idade"></ion-input>
+      <ion-input [(ngModel)]="novo_perfil.idade"></ion-input>
     </ion-item>
 
     <ion-item>
-      <img src="{{perfil.avatar}" alt="">
+      <img src="{{novo_perfil.avatar}" alt="">
       <ion-button expand="full" (click)="take_picture()">
         <ion-icon name="camera"></ion-icon>
       </ion-button>
@@ -28,5 +30,5 @@
     <ion-button expand="full" (click)="add()">Enviar</ion-button>
 
   </ion-list>
-
+  
 </ion-content>
