@@ -12,13 +12,14 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NovoPerfilModalPageModule } from './novo-perfil-modal/novo-perfil-modal.module'; 
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(),IonicStorageModule.forRoot(), AppRoutingModule, NovoPerfilModalPageModule],
+  imports: [BrowserModule, IonicModule.forRoot(),IonicStorageModule.forRoot(), AppRoutingModule, NovoPerfilModalPageModule, HttpClientModule,],
   providers: [
     StatusBar,
     SplashScreen,

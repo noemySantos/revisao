@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { ModalController } from '@ionic/angular';
 import { NovoPerfilModalPage } from '../novo-perfil-modal/novo-perfil-modal.page';
+import { HttpClient } from '@angular/common/http';
+import { LoadingController } from '@ionic/angular';
+import { PerfilServiceService } from '../services/perfil-service.service'
+
 
 @Component({
   selector: 'app-home',
@@ -9,46 +13,54 @@ import { NovoPerfilModalPage } from '../novo-perfil-modal/novo-perfil-modal.page
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  perfis = [];
+  perfis: any;
 
-  constructor(public modalController: ModalController, private storage: Storage) {
-    this.perfis = [
-      {
-        "avatar": "https://data.whicdn.com/images/310986657/large.jpg",
-        "nome": "Neymar",
-        "idade": "27 anos",
-        "likes": 0,
-      },
-
-      {
-        "avatar": "https://tmssl.akamaized.net/images/portrait/originals/29241-1462893880.jpg",
-        "nome": "tiago silva",
-        "idade": "34 anos",
-        "likes": 0,
-      }
-    ]
+  constructor(public modalController: ModalController, private storage: Storage, private http: HttpClient, public loadingController: LoadingController, private perfilService: PerfilServiceService) {
+    this.perfis = [];
+    this.loadingController.create({
+      message: 'Hellooow',
+    }).then((loader) => {
+      loader.present();
+      this.perfilService.list().subscribe(
+        (data) => {
+          this.perfis = data;
+          loader.dismiss();
+        }
+      )
+    });
   }
+
+  add(perfil) {
+    this.loadingController.create({
+      message: 'já já voltamos',
+    }).then((loader) => {
+      loader.present();
+      this.perfilService.add(perfil).subscribe(
+        (data) => {
+          this.perfis.log.push(data);
+          loader.dismiss();
+        }
+      )
+    });
+  }
+  async abrir_modal() {
+    const modal = await this.modalController.create({
+      component: NovoPerfilModalPage
+    });
+    await modal.present();
+
+    modal.onDidDismiss().then((contato) => {
+      this.add(contato.data)
+    })
+  }
+
   remove(perfil) {
     var i = this.perfis.indexOf(perfil);
     this.perfis.splice(i, 1);
     this.storage.set('perfil', this.perfis)
   }
 
-
   likes(perfil) {
     perfil.likes = perfil.likes + 1;
-  }
-
-  async abrir_modal() {
-    let modal = await this.modalController.create({
-      component: NovoPerfilModalPage
-    });
-
-    modal.onDidDismiss().then((retorno) => {
-      this.perfis.push(retorno.data);
-    });
-
-    modal.present();
-
   }
 }
