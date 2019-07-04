@@ -18,7 +18,7 @@ export class HomePage {
   constructor(public modalController: ModalController, private storage: Storage, private http: HttpClient, public loadingController: LoadingController, private perfilService: PerfilServiceService) {
     this.perfis = [];
     this.loadingController.create({
-      message: 'Hellooow',
+      message: 'Bem vindo',
     }).then((loader) => {
       loader.present();
       this.perfilService.list().subscribe(
@@ -49,16 +49,26 @@ export class HomePage {
     });
     await modal.present();
 
-    modal.onDidDismiss().then((contato) => {
-      this.add(contato.data)
+    modal.onDidDismiss().then((perfil) => {
+      this.add(perfil.data)
     })
   }
 
   remove(perfil) {
-    var i = this.perfis.indexOf(perfil);
-    this.perfis.splice(i, 1);
-    this.storage.set('perfil', this.perfis)
+    this.loadingController.create({
+      message: 'Removendo...',
+    }).then((loader) => {
+      loader.present();
+      this.perfilService.remove(perfil).subscribe(
+        (data) => {
+          var i = this.perfis.indexOf(perfil);
+          this.perfis.splice(i, 1);
+          loader.dismiss();
+        }
+      )
+    });
   }
+
 
   likes(perfil) {
     perfil.likes = perfil.likes + 1;
