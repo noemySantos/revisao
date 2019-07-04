@@ -5,6 +5,7 @@ import { NovoPerfilModalPage } from '../novo-perfil-modal/novo-perfil-modal.page
 import { HttpClient } from '@angular/common/http';
 import { LoadingController } from '@ionic/angular';
 import { PerfilServiceService } from '../services/perfil-service.service'
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 @Component({
@@ -69,8 +70,12 @@ export class HomePage {
     });
   }
 
+  salvar() {
+    this.storage.set(this.perfis, this.perfis);
+  }
 
   likes(perfil) {
     perfil.likes = perfil.likes + 1;
+    this.salvar();
   }
 }
