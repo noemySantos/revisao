@@ -18,7 +18,7 @@ export class HomePage {
   constructor(public modalController: ModalController, private storage: Storage, private http: HttpClient, public loadingController: LoadingController, private perfilService: PerfilServiceService) {
     this.perfis = [];
     this.loadingController.create({
-      message: 'Hellooow',
+      message: 'BEM VINDO',
     }).then((loader) => {
       loader.present();
       this.perfilService.list().subscribe(
@@ -32,7 +32,7 @@ export class HomePage {
 
   add(perfil) {
     this.loadingController.create({
-      message: 'já já voltamos',
+      message: 'Carregando, aguarde...',
     }).then((loader) => {
       loader.present();
       this.perfilService.add(perfil).subscribe(
@@ -55,12 +55,24 @@ export class HomePage {
   }
 
   remove(perfil) {
-    var i = this.perfis.indexOf(perfil);
-    this.perfis.splice(i, 1);
-    this.storage.set('perfil', this.perfis)
+    this.loadingController.create({
+      message: 'REMOVENDO ...',
+    }).then((loader) => {
+      loader.present();
+      this.perfilService.add(perfil).subscribe(
+        (data) => {
+          var i = this.perfis.indexOf(perfil);
+          this.perfis.splice(i, 1);
+          loader.dismiss();
+        }
+      )
+    });
+
   }
 
   likes(perfil) {
     perfil.likes = perfil.likes + 1;
   }
+
+  
 }

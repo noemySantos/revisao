@@ -6,7 +6,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class PerfilServiceService {
 
-  URL_BASE = 'https://5d14085876f3f5001415f49d.mockapi.io/perfil/'
+  URL_BASE = 'https://5d14083f76f3f5001415f492.mockapi.io/perfil/'
+  
 
   constructor(private http: HttpClient) { }
 
