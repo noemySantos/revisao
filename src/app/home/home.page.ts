@@ -70,12 +70,7 @@ export class HomePage {
     });
   }
 
-  salvar() {
-    this.storage.set(this.perfis, this.perfis);
-  }
-
   likes(perfil) {
     perfil.likes = perfil.likes + 1;
-    this.salvar();
   }
 }
