@@ -5,6 +5,7 @@ import { NovoPerfilModalPage } from '../novo-perfil-modal/novo-perfil-modal.page
 import { HttpClient } from '@angular/common/http';
 import { LoadingController } from '@ionic/angular';
 import { PerfilServiceService } from '../services/perfil-service.service'
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 @Component({
@@ -49,8 +50,8 @@ export class HomePage {
     });
     await modal.present();
 
-    modal.onDidDismiss().then((contato) => {
-      this.add(contato.data)
+    modal.onDidDismiss().then((perfil) => {
+      this.add(perfil.data)
     })
   }
 
@@ -59,7 +60,7 @@ export class HomePage {
       message: 'REMOVENDO ...',
     }).then((loader) => {
       loader.present();
-      this.perfilService.add(perfil).subscribe(
+      this.perfilService.remove(perfil).subscribe(
         (data) => {
           var i = this.perfis.indexOf(perfil);
           this.perfis.splice(i, 1);
@@ -67,7 +68,6 @@ export class HomePage {
         }
       )
     });
-
   }
 
   likes(perfil) {
