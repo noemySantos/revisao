@@ -71,8 +71,20 @@ export class HomePage {
   }
 
   likes(perfil) {
-    perfil.likes = perfil.likes + 1;
+    this.loadingController.create({
+      message: 'CARREGANDO',
+    }).then((loader) => {
+      loader.present();
+
+      perfil.likes = perfil.likes + 1;
+      this.perfilService.add(perfil).subscribe(
+        (data) => {
+          loader.dismiss();
+        }
+      )
+    });
   }
+
 
   
 }
