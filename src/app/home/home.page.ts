@@ -19,7 +19,7 @@ export class HomePage {
   constructor(public modalController: ModalController, private storage: Storage, private http: HttpClient, public loadingController: LoadingController, private perfilService: PerfilServiceService) {
     this.perfis = [];
     this.loadingController.create({
-      message: 'Bem vindo',
+      message: 'BEM VINDO',
     }).then((loader) => {
       loader.present();
       this.perfilService.list().subscribe(
@@ -33,7 +33,7 @@ export class HomePage {
 
   add(perfil) {
     this.loadingController.create({
-      message: 'já já voltamos',
+      message: 'Carregando, aguarde...',
     }).then((loader) => {
       loader.present();
       this.perfilService.add(perfil).subscribe(
@@ -57,7 +57,7 @@ export class HomePage {
 
   remove(perfil) {
     this.loadingController.create({
-      message: 'Removendo...',
+      message: 'REMOVENDO ...',
     }).then((loader) => {
       loader.present();
       this.perfilService.remove(perfil).subscribe(
@@ -72,16 +72,31 @@ export class HomePage {
 
   likes(perfil) {
     this.loadingController.create({
+<<<<<<< HEAD
       message: 'Carregando...',
     }).then((loader) => {
       loader.present();
       perfil.likes = perfil.likes + 1;
       this.perfilService.edit(perfil).subscribe(
+=======
+      message: 'CARREGANDO',
+    }).then((loader) => {
+      loader.present();
+
+      perfil.likes = perfil.likes + 1;
+      this.perfilService.add(perfil).subscribe(
+>>>>>>> 1399d214ab7e2fa1f574e89ec77f91bb0f805228
         (data) => {
           loader.dismiss();
         }
       )
     });
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1399d214ab7e2fa1f574e89ec77f91bb0f805228
   }
+
+
+  
 }
