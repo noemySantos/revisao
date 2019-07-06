@@ -38,7 +38,7 @@ export class HomePage {
       loader.present();
       this.perfilService.add(perfil).subscribe(
         (data) => {
-          this.perfis.log.push(data);
+          this.perfis.push(data);
           loader.dismiss();
         }
       )
@@ -71,6 +71,17 @@ export class HomePage {
   }
 
   likes(perfil) {
-    perfil.likes = perfil.likes + 1;
+    this.loadingController.create({
+      message: 'Carregando...',
+    }).then((loader) => {
+      loader.present();
+      perfil.likes = perfil.likes + 1;
+      this.perfilService.edit(perfil).subscribe(
+        (data) => {
+          loader.dismiss();
+        }
+      )
+    });
+
   }
 }

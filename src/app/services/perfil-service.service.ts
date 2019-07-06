@@ -18,7 +18,12 @@ export class PerfilServiceService {
     return this.http.post(this.URL_BASE, perfil);
   }
 
-  remove(perfil){
-  return this.http.delete(this.URL_BASE + perfil.id)
+  remove(perfil) {
+    return this.http.delete(this.URL_BASE + perfil.id)
   }
+
+  edit(perfil) {
+    return this.http.put(this.URL_BASE + perfil.id, perfil)
+  }
+ 
 }
